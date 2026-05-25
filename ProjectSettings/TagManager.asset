@@ -13,8 +13,8 @@ TagManager:
   - UI
   - Player
   - Ground
-  - 
-  - 
+  - Enemies
+  - Projectile
   - 
   - 
   - 
@@ -53,11 +53,20 @@ TagManager:
   - name: BackgroundNear
     uniqueID: 305625191
     locked: 0
+  - name: Buildings
+    uniqueID: 3939178407
+    locked: 0
   - name: Ground
     uniqueID: 3960500043
     locked: 0
+  - name: Enemies
+    uniqueID: 3292668925
+    locked: 0
   - name: Player
     uniqueID: 4231434853
+    locked: 0
+  - name: Projectile
+    uniqueID: 1633641925
     locked: 0
   m_RenderingLayers:
   - Default

@@ -582,7 +582,7 @@ PlayerSettings:
   webWasm2023: 0
   webEnableSubmoduleStrippingCompatibility: 0
   scriptingDefineSymbols:
-    Standalone: SENTIS_ANALYTICS_ENABLED
+    Standalone: SENTIS_ANALYTICS_ENABLED;APP_UI_EDITOR_ONLY
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend:
@@ -685,7 +685,7 @@ PlayerSettings:
   cloudProjectId: 8c4cfdec-09cb-4dec-a3b6-cbce72caeeeb
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: My project (1)
+  projectName: lyra-and-telos
   organizationId: ed_planet
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0

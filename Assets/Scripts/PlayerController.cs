@@ -15,6 +15,7 @@ namespace TarodevController
         private bool _cachedQueryStartInColliders;
 
         private Animator _anim;
+        private bool _movementLocked;
 
         #region Interface
         public Vector2 FrameInput => _frameInput.Move;
@@ -68,6 +69,26 @@ namespace TarodevController
             }
         }
 
+        public void SetMovementLocked(bool locked)
+        {
+            if (_movementLocked == locked) return;
+
+            _movementLocked = locked;
+
+            if (locked)
+            {
+                _frameVelocity.x = 0f;
+                _jumpToConsume = false;
+                _bufferedJumpUsable = false;
+                _timeJumpWasPressed = 0f;
+
+                if (_rb != null)
+                {
+                    _rb.linearVelocity = new Vector2(0f, _rb.linearVelocity.y);
+                }
+            }
+        }
+
         private void GatherInput()
         {
             var keyboard = Keyboard.current;
@@ -76,6 +97,17 @@ namespace TarodevController
             Vector2 moveInput = Vector2.zero;
             bool jumpDownPressed = false;
             bool jumpIsHeld = false;
+
+            if (_movementLocked)
+            {
+                _frameInput = new FrameInput
+                {
+                    JumpDown = false,
+                    JumpHeld = false,
+                    Move = Vector2.zero
+                };
+                return;
+            }
 
             if (keyboard != null)
             {
@@ -198,6 +230,12 @@ namespace TarodevController
         #region Horizontal
         private void HandleDirection()
         {
+            if (_movementLocked)
+            {
+                _frameVelocity.x = 0f;
+                return;
+            }
+
             if (_frameInput.Move.x == 0)
             {
                 var deceleration = _grounded ? _stats.GroundDeceleration : _stats.AirDeceleration;
