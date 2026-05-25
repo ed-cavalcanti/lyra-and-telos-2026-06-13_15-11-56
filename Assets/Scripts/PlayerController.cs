@@ -4,13 +4,6 @@ using UnityEngine.InputSystem;
 
 namespace TarodevController
 {
-    /// <summary>
-    /// Hey!
-    /// Tarodev here. I built this controller as there was a severe lack of quality & free 2D controllers out there.
-    /// I have a premium version on Patreon, which has every feature you'd expect from a polished controller. Link: https://www.patreon.com/tarodev
-    /// You can play and compete for best times here: https://tarodev.itch.io/extended-ultimate-2d-controller
-    /// If you hve any questions or would like to brag about your score, come to discord: https://discord.gg/tarodev
-    /// </summary>
     [RequireComponent(typeof(Rigidbody2D), typeof(Collider2D))]
     public class PlayerController : MonoBehaviour, IPlayerController
     {
@@ -21,12 +14,12 @@ namespace TarodevController
         private Vector2 _frameVelocity;
         private bool _cachedQueryStartInColliders;
 
-        #region Interface
+        private Animator _anim;
 
+        #region Interface
         public Vector2 FrameInput => _frameInput.Move;
         public event Action<bool, float> GroundedChanged;
         public event Action Jumped;
-
         #endregion
 
         private float _time;
@@ -35,6 +28,12 @@ namespace TarodevController
         {
             _rb = GetComponent<Rigidbody2D>();
             _col = GetComponent<CapsuleCollider2D>();
+            _anim = GetComponent<Animator>();
+
+            if (_anim != null)
+            {
+                _anim.applyRootMotion = false; // Garante que a animação não trave a física
+            }
 
             _cachedQueryStartInColliders = Physics2D.queriesStartInColliders;
         }
@@ -43,11 +42,30 @@ namespace TarodevController
         {
             _time += Time.deltaTime;
             GatherInput();
+            UpdateAnimations();
+        }
+
+        private void UpdateAnimations()
+        {
+            if (_anim == null) return;
+
+            // Se o input horizontal for diferente de 0, ele está correndo
+            bool isMovingHorizontally = Mathf.Abs(_frameInput.Move.x) > 0.01f;
+            _anim.SetBool("isRunning", isMovingHorizontally);
+
+            // Inverte a escala horizontal para espelhar o sprite perfeitamente
+            if (_frameInput.Move.x > 0)
+            {
+                transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+            }
+            else if (_frameInput.Move.x < 0)
+            {
+                transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+            }
         }
 
         private void GatherInput()
         {
-            // Check if the new Input System has devices active
             var keyboard = Keyboard.current;
             var gamepad = Gamepad.current;
 
@@ -55,7 +73,6 @@ namespace TarodevController
             bool jumpDownPressed = false;
             bool jumpIsHeld = false;
 
-            // Read Keyboard Input
             if (keyboard != null)
             {
                 if (keyboard.aKey.isPressed || keyboard.leftArrowKey.isPressed) moveInput.x = -1;
@@ -63,11 +80,14 @@ namespace TarodevController
                 if (keyboard.wKey.isPressed || keyboard.upArrowKey.isPressed) moveInput.y = 1;
                 if (keyboard.sKey.isPressed || keyboard.downArrowKey.isPressed) moveInput.y = -1;
 
-                if (keyboard.spaceKey.wasPressedThisFrame || keyboard.cKey.wasPressedThisFrame) jumpDownPressed = true;
-                if (keyboard.spaceKey.isPressed || keyboard.cKey.isPressed) jumpIsHeld = true;
+                if (keyboard.spaceKey.wasPressedThisFrame || keyboard.cKey.wasPressedThisFrame || keyboard.wKey.wasPressedThisFrame || keyboard.upArrowKey.wasPressedThisFrame)
+                {
+                    jumpDownPressed = true;
+                }
+                if (keyboard.spaceKey.isPressed || keyboard.cKey.isPressed || keyboard.wKey.isPressed || keyboard.upArrowKey.isPressed)
+                    jumpIsHeld = true;
             }
 
-            // Read Gamepad Input (Optional fallback)
             if (gamepad != null && moveInput == Vector2.zero)
             {
                 moveInput = gamepad.leftStick.ReadValue();
@@ -82,7 +102,6 @@ namespace TarodevController
                 Move = moveInput
             };
 
-            // Keep Tarodev's original deadzone / snapping logic intact
             if (_stats.SnapInput)
             {
                 _frameInput.Move.x = Mathf.Abs(_frameInput.Move.x) < _stats.HorizontalDeadZoneThreshold ? 0 : Mathf.Sign(_frameInput.Move.x);
@@ -108,46 +127,39 @@ namespace TarodevController
         }
 
         #region Collisions
-
         private float _frameLeftGrounded = float.MinValue;
         private bool _grounded;
 
         private void CheckCollisions()
         {
-            Physics2D.queriesStartInColliders = false;
+            var bounds = _col.bounds;
+            var probeSize = new Vector2(bounds.size.x * 0.9f, _stats.GrounderDistance);
+            var groundProbePos = new Vector2(bounds.center.x, bounds.min.y - probeSize.y * 0.5f);
+            var ceilingProbePos = new Vector2(bounds.center.x, bounds.max.y + probeSize.y * 0.5f);
 
-            // Ground and Ceiling
-            bool groundHit = Physics2D.CapsuleCast(_col.bounds.center, _col.size, _col.direction, 0, Vector2.down, _stats.GrounderDistance, ~_stats.PlayerLayer);
-            bool ceilingHit = Physics2D.CapsuleCast(_col.bounds.center, _col.size, _col.direction, 0, Vector2.up, _stats.GrounderDistance, ~_stats.PlayerLayer);
+            bool groundHit = Physics2D.OverlapBox(groundProbePos, probeSize, 0f, ~_stats.PlayerLayer);
+            bool ceilingHit = Physics2D.OverlapBox(ceilingProbePos, probeSize, 0f, ~_stats.PlayerLayer);
 
-            // Hit a Ceiling
             if (ceilingHit) _frameVelocity.y = Mathf.Min(0, _frameVelocity.y);
 
-            // Landed on the Ground
             if (!_grounded && groundHit)
             {
                 _grounded = true;
                 _coyoteUsable = true;
-                _bufferedJumpUsable = true;
+                // _bufferedJumpUsable = true;
                 _endedJumpEarly = false;
                 GroundedChanged?.Invoke(true, Mathf.Abs(_frameVelocity.y));
             }
-            // Left the Ground
             else if (_grounded && !groundHit)
             {
                 _grounded = false;
                 _frameLeftGrounded = _time;
                 GroundedChanged?.Invoke(false, 0);
             }
-
-            Physics2D.queriesStartInColliders = _cachedQueryStartInColliders;
         }
-
         #endregion
 
-
         #region Jumping
-
         private bool _jumpToConsume;
         private bool _bufferedJumpUsable;
         private bool _endedJumpEarly;
@@ -177,11 +189,9 @@ namespace TarodevController
             _frameVelocity.y = _stats.JumpPower;
             Jumped?.Invoke();
         }
-
         #endregion
 
         #region Horizontal
-
         private void HandleDirection()
         {
             if (_frameInput.Move.x == 0)
@@ -194,11 +204,9 @@ namespace TarodevController
                 _frameVelocity.x = Mathf.MoveTowards(_frameVelocity.x, _frameInput.Move.x * _stats.MaxSpeed, _stats.Acceleration * Time.fixedDeltaTime);
             }
         }
-
         #endregion
 
         #region Gravity
-
         private void HandleGravity()
         {
             if (_grounded && _frameVelocity.y <= 0f)
@@ -212,7 +220,6 @@ namespace TarodevController
                 _frameVelocity.y = Mathf.MoveTowards(_frameVelocity.y, -_stats.MaxFallSpeed, inAirGravity * Time.fixedDeltaTime);
             }
         }
-
         #endregion
 
         private void ApplyMovement() => _rb.linearVelocity = _frameVelocity;
@@ -235,7 +242,6 @@ namespace TarodevController
     public interface IPlayerController
     {
         public event Action<bool, float> GroundedChanged;
-
         public event Action Jumped;
         public Vector2 FrameInput { get; }
     }
