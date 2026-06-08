@@ -133,11 +133,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8997205012053154972, guid: 6037dd5d606ecf74fb1acfe7e820fe69, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 98.4
+      value: 99.7
       objectReference: {fileID: 0}
     - target: {fileID: 8997205012053154972, guid: 6037dd5d606ecf74fb1acfe7e820fe69, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 22.35
+      value: 22.51
       objectReference: {fileID: 0}
     - target: {fileID: 8997205012053154972, guid: 6037dd5d606ecf74fb1acfe7e820fe69, type: 3}
       propertyPath: m_LocalPosition.z
@@ -9919,10 +9919,10 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1563814830}
+  - {fileID: 2004232639}
   - {fileID: 617047663}
   - {fileID: 640628788}
   - {fileID: 1459238122}
-  - {fileID: 2004232639}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -13539,7 +13539,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1167996606}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1955331865}
+        m_TargetAssemblyTypeName: PauseManager, Assembly-CSharp
+        m_MethodName: VoltarAoMenuPrincipal
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1167996606
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16380,6 +16392,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DarkFilter
       objectReference: {fileID: 0}
+    - target: {fileID: 3515608746649016239, guid: 6fd214e2ddc7516418aac996aebdba86, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7978518662161526800, guid: 6fd214e2ddc7516418aac996aebdba86, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -16406,7 +16422,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7978518662161526800, guid: 6fd214e2ddc7516418aac996aebdba86, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 1920
+      value: 7964.4062
       objectReference: {fileID: 0}
     - target: {fileID: 7978518662161526800, guid: 6fd214e2ddc7516418aac996aebdba86, type: 3}
       propertyPath: m_SizeDelta.y
@@ -16442,7 +16458,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7978518662161526800, guid: 6fd214e2ddc7516418aac996aebdba86, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: -195.68237
       objectReference: {fileID: 0}
     - target: {fileID: 7978518662161526800, guid: 6fd214e2ddc7516418aac996aebdba86, type: 3}
       propertyPath: m_AnchoredPosition.y
