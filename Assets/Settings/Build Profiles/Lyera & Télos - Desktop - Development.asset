@@ -719,7 +719,7 @@ MonoBehaviour:
     - line: '|   activeInputHandler: 1'
     - line: '|   windowsGamepadBackendHint: 0'
     - line: '|   enableDirectStorage: 0'
-    - line: '|   cloudProjectId: 8c4cfdec-09cb-4dec-a3b6-cbce72caeeeb'
+    - line: '|   cloudProjectId: 86ec758f-2966-4974-a680-1731525b0628'
     - line: '|   framebufferDepthMemorylessMode: 0'
     - line: '|   qualitySettingsNames: []'
     - line: '|   projectName: lyra-and-telos'
