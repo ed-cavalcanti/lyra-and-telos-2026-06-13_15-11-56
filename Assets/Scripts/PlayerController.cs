@@ -25,6 +25,8 @@ namespace TarodevController
         #endregion
 
         private float _time;
+        private Vector2 _lastSafePosition;
+        private float _timeGrounded;
 
         private void Awake()
         {
@@ -39,6 +41,8 @@ namespace TarodevController
             }
 
             _cachedQueryStartInColliders = Physics2D.queriesStartInColliders;
+
+            _lastSafePosition = transform.position;
         }
 
         private void Update()
@@ -79,14 +83,14 @@ namespace TarodevController
 
             if (locked)
             {
-                _frameVelocity.x = 0f;
+                _frameVelocity = Vector2.zero; // Zera o X e o Y de vez
                 _jumpToConsume = false;
                 _bufferedJumpUsable = false;
                 _timeJumpWasPressed = 0f;
 
                 if (_rb != null)
                 {
-                    _rb.linearVelocity = new Vector2(0f, _rb.linearVelocity.y);
+                    _rb.linearVelocity = Vector2.zero; // Para o corpo físico completamente
                 }
             }
         }
@@ -156,6 +160,7 @@ namespace TarodevController
         private void FixedUpdate()
         {
             CheckCollisions();
+            UpdateSafePosition();
 
             HandleJump();
             HandleDirection();
@@ -192,7 +197,13 @@ namespace TarodevController
             bool groundHit = false;
             if (_frameVelocity.y <= 0f)
             {
+                // --- INÍCIO DA MODIFICAÇÃO PARA IGNORAR O ESPINHO ---
+                bool originalQueriesHitTriggers = Physics2D.queriesHitTriggers;
+                Physics2D.queriesHitTriggers = false;
+
                 groundHit = Physics2D.OverlapBox(groundProbePos, probeSize, 0f, ~_stats.PlayerLayer);
+
+                Physics2D.queriesHitTriggers = originalQueriesHitTriggers;
             }
 
             if (!_grounded && groundHit)
@@ -268,6 +279,13 @@ namespace TarodevController
         #region Gravity
         private void HandleGravity()
         {
+            // ADICIONE ESTA TRAVA AQUI:
+            if (_movementLocked)
+            {
+                _frameVelocity.y = 0f;
+                return;
+            }
+
             if (_grounded && _frameVelocity.y <= 0f)
             {
                 _frameVelocity.y = _stats.GroundingForce;
@@ -279,6 +297,58 @@ namespace TarodevController
                 _frameVelocity.y = Mathf.MoveTowards(_frameVelocity.y, -_stats.MaxFallSpeed, inAirGravity * Time.fixedDeltaTime);
             }
         }
+        #endregion
+
+        #region SafePostion
+        private void UpdateSafePosition()
+        {
+            // Só contabiliza se estiver no chão e não estiver pulando
+            if (_grounded && _frameVelocity.y <= 0f)
+            {
+                _timeGrounded += Time.fixedDeltaTime;
+
+                // Exige 0.25 segundos pisando no chão para considerar "seguro"
+                if (_timeGrounded >= 0.3f)
+                {
+                    // Salva a posição, mas um pouquinho mais alta (Vector3.up * 0.2f)
+                    // Isso evita que o personagem spawne "dentro" do chão ou escorregue
+                    _lastSafePosition = transform.position + (Vector3.up * 0.2f);
+
+                    // O GRANDE SEGREDO: Zera o tempo depois de salvar!
+                    // Isso faz com que o script só salve uma nova posição se você 
+                    // passar MAIS 0.25 segundos no chão. Mantendo o save sempre longe da beirada.
+                    _timeGrounded = 0f;
+                }
+            }
+            else
+            {
+                // Se saiu do chão (pulou ou caiu), zera o contador
+                _timeGrounded = 0f;
+            }
+        }
+
+        // Método para o sistema de respawn chamar
+        public void TeleportTo(Vector2 position)
+        {
+            // 1. Zera todas as velocidades acumuladas
+            _frameVelocity = Vector2.zero;
+
+            // 2. Move a Transform visual
+            transform.position = position;
+
+            if (_rb != null)
+            {
+                // 3. Move o componente físico e zera a inércia
+                _rb.position = position;
+                _rb.linearVelocity = Vector2.zero;
+            }
+
+            // 4. ESTA É A LINHA MÁGICA: Força a Unity a atualizar tudo imediatamente, 
+            // ignorando qualquer cálculo pendente de gravidade ou atraso de interpolação.
+            Physics2D.SyncTransforms();
+        }
+
+        public Vector2 GetSafePosition() => _lastSafePosition;
         #endregion
 
         private void ApplyMovement() => _rb.linearVelocity = _frameVelocity;

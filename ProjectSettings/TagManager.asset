@@ -16,7 +16,7 @@ TagManager:
   - Enemies
   - Projectile
   - OneWayPlatform
-  - 
+  - Hazard
   - 
   - 
   - 
@@ -58,6 +58,9 @@ TagManager:
     locked: 0
   - name: Buildings
     uniqueID: 3939178407
+    locked: 0
+  - name: Spikes
+    uniqueID: 911837365
     locked: 0
   - name: Ground
     uniqueID: 3960500043
