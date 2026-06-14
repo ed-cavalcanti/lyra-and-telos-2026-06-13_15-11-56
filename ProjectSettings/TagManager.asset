@@ -59,6 +59,9 @@ TagManager:
   - name: Buildings
     uniqueID: 3939178407
     locked: 0
+  - name: Decor
+    uniqueID: 1691920467
+    locked: 0
   - name: Spikes
     uniqueID: 911837365
     locked: 0
