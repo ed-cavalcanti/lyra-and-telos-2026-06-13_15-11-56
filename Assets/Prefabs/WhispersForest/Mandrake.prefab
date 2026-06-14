@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 4174432434485972339}
   - component: {fileID: 7202733787987692351}
   - component: {fileID: 2384472828842411107}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Mandrake
   m_TagString: Untagged
   m_Icon: {fileID: 0}

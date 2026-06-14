@@ -1,37 +1,34 @@
 fileFormatVersion: 2
-guid: 276c589a18e35644eb14f8d6b749ef07
+guid: 1094d7000991fa949aad9a83db25ddab
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6297841393305379348
-    second: Mossy - Hanging Plants_0
+      213: -6325178687322584438
+    second: Group 26088017 (1)_0
   - first:
-      213: -9120406111138420596
-    second: Mossy - Hanging Plants_1
+      213: 8122556852694291913
+    second: Group 26088017 (1)_1
   - first:
-      213: -3643801988075151291
-    second: Mossy - Hanging Plants_2
+      213: 1483860832409705267
+    second: Group 26088017 (1)_2
   - first:
-      213: 6343888730784975065
-    second: Mossy - Hanging Plants_3
+      213: -108152724846616851
+    second: Group 26088017 (1)_3
   - first:
-      213: -1960693398722581246
-    second: Mossy - Hanging Plants_4
+      213: -7059009718711735280
+    second: Group 26088017 (1)_4
   - first:
-      213: -5342899683599240943
-    second: Mossy - Hanging Plants_5
+      213: -5908624776868076301
+    second: Group 26088017 (1)_5
   - first:
-      213: -3722490455595391638
-    second: Mossy - Hanging Plants_6
+      213: -4981099938946667131
+    second: Group 26088017 (1)_6
   - first:
-      213: 3986061963867474379
-    second: Mossy - Hanging Plants_7
+      213: 5161389754577934873
+    second: Group 26088017 (1)_7
   - first:
-      213: -8677164435290038233
-    second: Mossy - Hanging Plants_8
-  - first:
-      213: -5427887325597579183
-    second: Mossy - Hanging Plants_9
+      213: 6487893804829513584
+    second: Group 26088017 (1)_8
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -78,7 +75,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 384
+  spritePixelsToUnits: 120
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -140,13 +137,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Mossy - Hanging Plants_0
+      name: Group 26088017 (1)_0
       rect:
         serializedVersion: 2
-        x: 112
-        y: 1649
-        width: 365
-        height: 1179
+        x: 9
+        y: 2345
+        width: 411
+        height: 876
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -155,20 +152,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ced1844ce929998a0800000000000000
-      internalID: -6297841393305379348
+      spriteID: a8a04410f737838a0800000000000000
+      internalID: -6325178687322584438
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Mossy - Hanging Plants_1
+      name: Group 26088017 (1)_1
       rect:
         serializedVersion: 2
-        x: 516
-        y: 1856
-        width: 365
-        height: 978
+        x: 793
+        y: 2337
+        width: 489
+        height: 1019
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -177,20 +174,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c88ea42c6fecd6180800000000000000
-      internalID: -9120406111138420596
+      spriteID: 9c512c02c6e19b070800000000000000
+      internalID: 8122556852694291913
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Mossy - Hanging Plants_2
+      name: Group 26088017 (1)_2
       rect:
         serializedVersion: 2
-        x: 912
-        y: 1852
-        width: 364
-        height: 978
+        x: 1584
+        y: 2319
+        width: 661
+        height: 909
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -199,20 +196,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5402be4c56d9e6dc0800000000000000
-      internalID: -3643801988075151291
+      spriteID: 33b55e3b09bb79410800000000000000
+      internalID: 1483860832409705267
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Mossy - Hanging Plants_3
+      name: Group 26088017 (1)_3
       rect:
         serializedVersion: 2
-        x: 1307
-        y: 2010
-        width: 306
-        height: 822
+        x: 12
+        y: 1186
+        width: 411
+        height: 867
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -221,20 +218,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9d8ca0570350a0850800000000000000
-      internalID: 6343888730784975065
+      spriteID: deed6067ba3cf7ef0800000000000000
+      internalID: -108152724846616851
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Mossy - Hanging Plants_4
+      name: Group 26088017 (1)_4
       rect:
         serializedVersion: 2
-        x: 1667
-        y: 1894
-        width: 269
-        height: 951
+        x: 793
+        y: 1135
+        width: 488
+        height: 1019
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -243,20 +240,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 20defa7fdb73ac4e0800000000000000
-      internalID: -1960693398722581246
+      spriteID: 01c2822af0c590e90800000000000000
+      internalID: -7059009718711735280
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Mossy - Hanging Plants_5
+      name: Group 26088017 (1)_5
       rect:
         serializedVersion: 2
-        x: 88
-        y: 172
-        width: 468
-        height: 1377
+        x: 1578
+        y: 1179
+        width: 662
+        height: 917
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -265,20 +262,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1113580bb053ad5b0800000000000000
-      internalID: -5342899683599240943
+      spriteID: 3f4e4b71219500ea0800000000000000
+      internalID: -5908624776868076301
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Mossy - Hanging Plants_6
+      name: Group 26088017 (1)_6
       rect:
         serializedVersion: 2
-        x: 716
-        y: 172
-        width: 468
-        height: 1377
+        x: 13
+        y: 90
+        width: 406
+        height: 866
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -287,20 +284,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a65647a37ae075cc0800000000000000
-      internalID: -3722490455595391638
+      spriteID: 58d2d5c1ff39fdab0800000000000000
+      internalID: -4981099938946667131
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Mossy - Hanging Plants_7
+      name: Group 26088017 (1)_7
       rect:
         serializedVersion: 2
-        x: 1178
-        y: 1318
-        width: 761
-        height: 511
+        x: 814
+        y: 25
+        width: 450
+        height: 941
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -309,20 +306,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: bc94401bc36515730800000000000000
-      internalID: 3986061963867474379
+      spriteID: 91a55f4b2a0f0a740800000000000000
+      internalID: 5161389754577934873
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Mossy - Hanging Plants_8
+      name: Group 26088017 (1)_8
       rect:
         serializedVersion: 2
-        x: 1224
-        y: 712
-        width: 761
-        height: 511
+        x: 1585
+        y: 56
+        width: 655
+        height: 908
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -331,30 +328,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 72062e07be4849780800000000000000
-      internalID: -8677164435290038233
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Mossy - Hanging Plants_9
-      rect:
-        serializedVersion: 2
-        x: 1222
-        y: 84
-        width: 761
-        height: 511
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 15849ec4c354ca4b0800000000000000
-      internalID: -5427887325597579183
+      spriteID: 07712598a01a90a50800000000000000
+      internalID: 6487893804829513584
       vertices: []
       indices: 
       edges: []
@@ -373,16 +348,15 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Mossy - Hanging Plants_0: -6297841393305379348
-      Mossy - Hanging Plants_1: -9120406111138420596
-      Mossy - Hanging Plants_2: -3643801988075151291
-      Mossy - Hanging Plants_3: 6343888730784975065
-      Mossy - Hanging Plants_4: -1960693398722581246
-      Mossy - Hanging Plants_5: -5342899683599240943
-      Mossy - Hanging Plants_6: -3722490455595391638
-      Mossy - Hanging Plants_7: 3986061963867474379
-      Mossy - Hanging Plants_8: -8677164435290038233
-      Mossy - Hanging Plants_9: -5427887325597579183
+      Group 26088017 (1)_0: -6325178687322584438
+      Group 26088017 (1)_1: 8122556852694291913
+      Group 26088017 (1)_2: 1483860832409705267
+      Group 26088017 (1)_3: -108152724846616851
+      Group 26088017 (1)_4: -7059009718711735280
+      Group 26088017 (1)_5: -5908624776868076301
+      Group 26088017 (1)_6: -4981099938946667131
+      Group 26088017 (1)_7: 5161389754577934873
+      Group 26088017 (1)_8: 6487893804829513584
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 6041207181868145021}
   - component: {fileID: 2601763714590207685}
   - component: {fileID: 3168585048797607587}
-  - component: {fileID: 3805291974819852566}
+  - component: {fileID: 9070962781417843875}
   m_Layer: 6
-  m_Name: GargoyleProjectile
+  m_Name: BombFlowerProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -84,8 +84,8 @@ SpriteRenderer:
   m_SortingLayer: 13
   m_SortingOrder: 5
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -7503402373696077091, guid: 0181261bcb01f12419d2e3ebeb751fac, type: 3}
-  m_Color: {r: 1, g: 0.010436682, b: 0, a: 1}
+  m_Sprite: {fileID: -2430043438324715632, guid: e497eb41583e570458fa4b5f21afe43d, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -157,7 +157,7 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: -0.0036565464}
   m_Radius: 0.3208282
---- !u!114 &3805291974819852566
+--- !u!114 &9070962781417843875
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -166,9 +166,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 7153970041096138883}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cab34842c914b48488e4360bde0388d5, type: 3}
+  m_Script: {fileID: 11500000, guid: b1c1e38e6d18beb46a70327ee1997d7b, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GargoyleProjectile
-  speed: 12
+  m_EditorClassIdentifier: Assembly-CSharp::BombFlowerProjectile
+  speed: 8
   damage: 1
   lifeTime: 4

@@ -39,10 +39,16 @@ public class Projectile : MonoBehaviour
         // Ignora colisão com o próprio player
         if (other.CompareTag("Player")) return;
 
-        // Acertou um inimigo?
+        // Tenta achar o inimigo normal (Gárgula, etc)
         if (other.TryGetComponent(out EnemyHealth enemyHealth))
         {
             enemyHealth.TakeDamage(damage);
+        }
+        // Tenta achar a planta explosiva
+        else if (other.TryGetComponent(out BombFlowerHealth plantHealth))
+        {
+            // O script da planta aceita de onde o dano veio (transform) para calcular knockback
+            plantHealth.TakeDamage(damage, transform);
         }
 
         SpawnHitEffect();
