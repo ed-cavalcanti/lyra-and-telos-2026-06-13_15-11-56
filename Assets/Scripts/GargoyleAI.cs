@@ -65,6 +65,7 @@ public class GargoyleAI : MonoBehaviour
     // ATENÇÃO: Chame este método via Animation Event no frame exato em que ela "solta" a magia!
     public void AnimationEventFireProjectile()
     {
+        AudioManager.Instance.PlaySFX("GargoyleProjectile");
         if (projectilePrefab == null || firePoint == null || player == null)
         {
             Debug.LogWarning("Faltam referências para atirar o projétil!");

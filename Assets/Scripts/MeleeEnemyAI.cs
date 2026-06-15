@@ -109,6 +109,7 @@ public class MeleeEnemyAI : MonoBehaviour
 
             // Dispara a animação
             animator.SetTrigger(AttackHash);
+            AudioManager.Instance.PlaySFX("ArcaneThiefAttack");
             nextAttackTime = Time.time + attackCooldown;
         }
     }

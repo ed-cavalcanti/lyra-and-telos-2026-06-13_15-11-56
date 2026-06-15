@@ -93,6 +93,7 @@ namespace TarodevController
         {
             // Toca a animação e SÓ ISSO. O dano fica para depois.
             if (_anim != null) _anim.SetTrigger("MeleeAttack");
+            AudioManager.Instance.PlaySFX("MeleeAttack");
         }
 
         // === NOVO: Método para o Animation Event ===

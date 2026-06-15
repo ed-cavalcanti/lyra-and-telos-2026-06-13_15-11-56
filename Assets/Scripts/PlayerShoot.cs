@@ -38,6 +38,7 @@ public class PlayerShoot : MonoBehaviour
         // Começou a segurar
         if (WasAttackPressedThisFrame() && !isCharging)
         {
+            AudioManager.Instance.PlayLoopingSFX("ProjectileCharging");
             isCharging = true;
             hasShot = false;
             holdTimer = 0f;
@@ -57,6 +58,8 @@ public class PlayerShoot : MonoBehaviour
             if (holdTimer >= chargeTime && !hasShot)
             {
                 Shoot();
+                AudioManager.Instance.StopLoopingSFX();
+                AudioManager.Instance.PlaySFX("ProjectileGo");
                 hasShot = true;
                 playerController?.SetMovementLocked(false);
             }
@@ -70,6 +73,7 @@ public class PlayerShoot : MonoBehaviour
             if (!hasShot)
             {
                 // Interrompe a animação voltando para Idle
+                AudioManager.Instance.StopLoopingSFX();
                 animator.ResetTrigger(AttackHash);
                 animator.Play("Idle");
                 Debug.Log("[PlayerShoot] Carga cancelada.");
