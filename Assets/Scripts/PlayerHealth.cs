@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
+using TarodevController; // Necessário para acessar o PlayerController
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -18,13 +19,16 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private Color damageColor = Color.red;
     [SerializeField] private float flashDuration = 0.1f;
-    [SerializeField] private int flashCount = 3;        // Quantas vezes pisca durante o I-Frame
+    [SerializeField] private int flashCount = 3;
 
     public UnityEvent<int, int> OnHealthChanged;
     public UnityEvent OnDeath;
 
     private Rigidbody2D rb;
     private Color originalColor;
+
+    // === NOVO: Variável para guardar o Checkpoint ===
+    private Vector2 lastCheckpointPosition;
 
     private void Awake()
     {
@@ -33,6 +37,12 @@ public class PlayerHealth : MonoBehaviour
 
         if (spriteRenderer != null)
             originalColor = spriteRenderer.color;
+    }
+
+    private void Start()
+    {
+        // Define a posição inicial como o primeiro checkpoint padrão
+        lastCheckpointPosition = transform.position;
     }
 
     public void TakeDamage(int amount, Transform damageSource = null)
@@ -61,11 +71,17 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+    // === NOVO: Método para a estátua chamar e salvar a posição ===
+    public void SetCheckpoint(Vector2 newPosition)
+    {
+        lastCheckpointPosition = newPosition;
+        Debug.Log("Novo checkpoint salvo em: " + newPosition);
+    }
+
     private System.Collections.IEnumerator InvincibilityRoutine()
     {
         isInvincible = true;
 
-        // Pisca N vezes durante a invencibilidade
         int effectiveFlashCount = Mathf.Max(1, flashCount);
         float intervalPerFlash = invincibleDuration / (effectiveFlashCount * 2);
         if (flashDuration > 0f)
@@ -95,9 +111,25 @@ public class PlayerHealth : MonoBehaviour
     private void Die()
     {
         OnDeath?.Invoke();
-        Debug.Log("[Player] Morreu!");
+    }
 
-        gameObject.SetActive(false);
+    public void RespawnAtCheckpoint()
+    {
+        // 1. Restaura a vida inteira
+        Heal(maxHealth);
+
+        // 2. Teleporta o jogador de volta para a estátua
+        TarodevController.PlayerController controller = GetComponent<TarodevController.PlayerController>();
+        if (controller != null)
+        {
+            controller.TeleportTo(lastCheckpointPosition);
+        }
+        else
+        {
+            transform.position = lastCheckpointPosition;
+        }
+
+        Debug.Log("Player renasceu no checkpoint: " + lastCheckpointPosition);
     }
 
     public int GetCurrentHealth() => currentHealth;

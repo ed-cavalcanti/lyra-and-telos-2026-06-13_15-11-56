@@ -63,7 +63,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -12.1, y: -1.59, z: 0}
-  m_LocalScale: {x: 0.55, y: 0.55, z: 1}
+  m_LocalScale: {x: 0.28, y: 0.28, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1442567190801520187}
@@ -116,7 +116,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -63532443
-  m_SortingLayer: 10
+  m_SortingLayer: 12
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 1727761114157799851, guid: a9d155ae2ae13fa43b98088cd3a71252, type: 3}
@@ -214,15 +214,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4113970b9b20b6a4fa6d3c516b99986c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeleeEnemyAI
-  moveSpeed: 6
+  moveSpeed: 4
   groundCheck: {fileID: 7963405749113658099}
   groundLayer:
     serializedVersion: 2
     m_Bits: 128
   chaseRange: 10
   attackRange: 2
-  attackCooldown: 1.5
-  attackOffsetX: 1.6
+  attackCooldown: 2
+  attackOffsetX: 1.2
   attackOffsetY: 0
   attackRadius: 0.5
   playerLayer:

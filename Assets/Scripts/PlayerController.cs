@@ -18,6 +18,14 @@ namespace TarodevController
         private Animator _anim;
         private bool _movementLocked;
 
+        [Header("Combat")]
+        [SerializeField] private Transform _attackPoint; // Onde o ataque acontece
+        [SerializeField] private float _attackRange = 0.5f; // Tamanho da área de ataque
+        [SerializeField] private LayerMask _enemyLayers; // O que é considerado inimigo
+        [SerializeField] private int _attackDamage = 10; // Dano do ataque
+        [SerializeField] private float _attackRate = 2f; // Quantos ataques por segundo
+        private float _nextAttackTime = 0f; // Controle de cooldown
+
         #region Interface
         public Vector2 FrameInput => _frameInput.Move;
         public event Action<bool, float> GroundedChanged;
@@ -50,6 +58,12 @@ namespace TarodevController
             _time += Time.deltaTime;
             GatherInput();
             UpdateAnimations();
+
+            if (_time >= _nextAttackTime && _frameInput.AttackDown && !_movementLocked)
+            {
+                Attack();
+                _nextAttackTime = _time + 1f / _attackRate; // Calcula o tempo até o próximo ataque permitido
+            }
         }
 
         private void UpdateAnimations()
@@ -72,6 +86,34 @@ namespace TarodevController
             else if (_frameInput.Move.x < 0)
             {
                 transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+            }
+        }
+
+        private void Attack()
+        {
+            // Toca a animação e SÓ ISSO. O dano fica para depois.
+            if (_anim != null) _anim.SetTrigger("MeleeAttack");
+        }
+
+        // === NOVO: Método para o Animation Event ===
+        // Precisa ser "public" (ou visível para a engine) para a Animação conseguir encontrá-lo
+        public void ExecuteMeleeDamage()
+        {
+            if (_attackPoint == null) return;
+
+            // Detecta os inimigos no alcance
+            Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(_attackPoint.position, _attackRange, _enemyLayers);
+
+            // Aplica o dano
+            foreach (Collider2D enemy in hitEnemies)
+            {
+                EnemyHealth enemyHealth = enemy.GetComponent<EnemyHealth>();
+
+                if (enemyHealth != null)
+                {
+                    enemyHealth.TakeDamage(_attackDamage, transform);
+                    Debug.Log($"[Animation Event] Acertou {enemy.name} e causou {_attackDamage} de dano!");
+                }
             }
         }
 
@@ -103,6 +145,7 @@ namespace TarodevController
             Vector2 moveInput = Vector2.zero;
             bool jumpDownPressed = false;
             bool jumpIsHeld = false;
+            bool attackDown = false;
 
             if (_movementLocked)
             {
@@ -110,7 +153,8 @@ namespace TarodevController
                 {
                     JumpDown = false,
                     JumpHeld = false,
-                    Move = Vector2.zero
+                    Move = Vector2.zero,
+                    AttackDown = false
                 };
                 return;
             }
@@ -128,6 +172,7 @@ namespace TarodevController
                 }
                 if (keyboard.spaceKey.isPressed || keyboard.cKey.isPressed || keyboard.wKey.isPressed || keyboard.upArrowKey.isPressed)
                     jumpIsHeld = true;
+                if (keyboard.jKey.wasPressedThisFrame) attackDown = true;
             }
 
             if (gamepad != null && moveInput == Vector2.zero)
@@ -135,13 +180,15 @@ namespace TarodevController
                 moveInput = gamepad.leftStick.ReadValue();
                 if (gamepad.buttonSouth.wasPressedThisFrame) jumpDownPressed = true;
                 if (gamepad.buttonSouth.isPressed) jumpIsHeld = true;
+                if (gamepad.buttonWest.wasPressedThisFrame) attackDown = true;
             }
 
             _frameInput = new FrameInput
             {
                 JumpDown = jumpDownPressed,
                 JumpHeld = jumpIsHeld,
-                Move = moveInput
+                Move = moveInput,
+                AttackDown = attackDown
             };
 
             if (_stats.SnapInput)
@@ -353,6 +400,13 @@ namespace TarodevController
 
         private void ApplyMovement() => _rb.linearVelocity = _frameVelocity;
 
+        private void OnDrawGizmosSelected()
+        {
+            if (_attackPoint == null) return;
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(_attackPoint.position, _attackRange);
+        }
+
 #if UNITY_EDITOR
         private void OnValidate()
         {
@@ -366,6 +420,7 @@ namespace TarodevController
         public bool JumpDown;
         public bool JumpHeld;
         public Vector2 Move;
+        public bool AttackDown;
     }
 
     public interface IPlayerController

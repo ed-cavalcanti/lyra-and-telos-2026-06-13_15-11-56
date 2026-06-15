@@ -6,29 +6,39 @@ public class GameOverManager : MonoBehaviour
     [Header("Referências de UI")]
     [SerializeField] private GameObject gameOverPanel; // Arraste o GameOver_Panel aqui
 
-    // Este método será chamado pelo UnityEvent OnDeath do jogador
     public void ExibirGameOver()
     {
         gameOverPanel.SetActive(true);
-        
-        // Congelar o tempo é opcional no Game Over, mas evita que 
-        // inimigos continuem se movendo ou atacando a tela de morte.
-        Time.timeScale = 0f; 
+        Time.timeScale = 0f;
     }
 
-    public void JogarNovamente()
+    // === NOVO: Método que o seu botão de "Continuar" vai chamar ===
+    public void ContinuarDoCheckpoint()
     {
-        // Regra de Ouro: Sempre devolva o tempo ao normal antes de recarregar a cena!
-        Time.timeScale = 1f; 
-        
-        // Recarrega a cena atual, seja ela qual for
+        // 1. O tempo volta a correr
+        Time.timeScale = 1f;
+
+        // 2. Esconde a tela de morte
+        gameOverPanel.SetActive(false);
+
+        // 3. Encontra o jogador na cena e manda ele reviver no checkpoint
+        PlayerHealth player = FindAnyObjectByType<PlayerHealth>();
+        if (player != null)
+        {
+            player.RespawnAtCheckpoint();
+        }
+    }
+
+    // Mantive a função original caso você queira um botão de "Reiniciar Fase Inteira"
+    public void ReiniciarCena()
+    {
+        Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void VoltarAoMenu()
     {
         Time.timeScale = 1f;
-        // Substitua pelo nome exato da sua Scene de Menu (ex: "Menu_Scene")
-        SceneManager.LoadScene("MenuPrincipal"); 
+        SceneManager.LoadScene("MenuPrincipal");
     }
 }

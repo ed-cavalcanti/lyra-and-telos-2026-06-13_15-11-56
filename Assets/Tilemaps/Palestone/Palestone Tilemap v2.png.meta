@@ -1,0 +1,1280 @@
+fileFormatVersion: 2
+guid: d37825f5300766342ae314e14224dfaf
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -4384100988041340739
+    second: Palestone Tilemap v2_0
+  - first:
+      213: 1240757770558112814
+    second: Palestone Tilemap v2_1
+  - first:
+      213: 2561928964531367967
+    second: Palestone Tilemap v2_2
+  - first:
+      213: -5182062414157248531
+    second: Palestone Tilemap v2_3
+  - first:
+      213: -4726838971086135854
+    second: Palestone Tilemap v2_4
+  - first:
+      213: -967983721654167009
+    second: Palestone Tilemap v2_5
+  - first:
+      213: -5422048195710402874
+    second: Palestone Tilemap v2_6
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 512
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Palestone Tilemap v2_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 3072
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: db85b5c116b8823c0800000000000000
+      internalID: -4384100988041340739
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Palestone Tilemap v2_1
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 3072
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e240c665e9e083110800000000000000
+      internalID: 1240757770558112814
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Palestone Tilemap v2_2
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 3072
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f103daec1dccd8320800000000000000
+      internalID: 2561928964531367967
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Palestone Tilemap v2_3
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 3072
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de70148a0bd9518b0800000000000000
+      internalID: -5182062414157248531
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Palestone Tilemap v2_4
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 3072
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2dd10f9eff4e66eb0800000000000000
+      internalID: -4726838971086135854
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Palestone Tilemap v2_5
+      rect:
+        serializedVersion: 2
+        x: 2560
+        y: 3072
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f1a517a0fe70192f0800000000000000
+      internalID: -967983721654167009
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Palestone Tilemap v2_6
+      rect:
+        serializedVersion: 2
+        x: 3072
+        y: 3072
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6ce32aba4e301c4b0800000000000000
+      internalID: -5422048195710402874
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Palestone Tilemap v2_7
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2560
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 88f8de2bc06f5dd4d9ce91c09be9621c
+      internalID: 490331980
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Palestone Tilemap v2_8
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 2560
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 45f11699d513e1f4e860a92be3415cf5
+      internalID: -46738319
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Palestone Tilemap v2_9
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 2560
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bcb8a7b5573bd7f49a730e64166b0d44
+      internalID: -480099586
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Palestone Tilemap v2_10
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 2560
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e8eac34a8751f747b5e4f1c21ec1350
+      internalID: -1133689105
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Palestone Tilemap v2_11
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 2560
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 456316a2ae11c05408ca0d833c824c4c
+      internalID: -1173292131
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Palestone Tilemap v2_12
+      rect:
+        serializedVersion: 2
+        x: 2560
+        y: 2560
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c05f20bcc4f395b44bd0834793de28c1
+      internalID: 804254701
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Palestone Tilemap v2_13
+      rect:
+        serializedVersion: 2
+        x: 3072
+        y: 2560
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 11b666d01dbdf734ab739f27f98c32ad
+      internalID: -333976079
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Palestone Tilemap v2_14
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2048
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9cabdfe20e143314796758b6ef792b11
+      internalID: -1926917520
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Palestone Tilemap v2_15
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 2048
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 572458826efec104794ab5a14ca602d5
+      internalID: 1278301000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Palestone Tilemap v2_16
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 2048
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e5ac157b34580444b820d7823f80c2d9
+      internalID: -513701967
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Palestone Tilemap v2_17
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 2048
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 19c489a00d74b24448c342303df4af67
+      internalID: -698523494
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Palestone Tilemap v2_18
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 2048
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc10372b78e8cee4e86f60dc648c573f
+      internalID: -47797080
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Palestone Tilemap v2_19
+      rect:
+        serializedVersion: 2
+        x: 2560
+        y: 2048
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0cbc57ea1c0c6d84aa45bb761d87a075
+      internalID: 2063310250
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Palestone Tilemap v2_20
+      rect:
+        serializedVersion: 2
+        x: 3072
+        y: 2048
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5f287dc8e1716c8498d7d8be36012b62
+      internalID: -2014777791
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Palestone Tilemap v2_21
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1536
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4bbc3ff92636f554f8be114129b77f16
+      internalID: -1095896033
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Palestone Tilemap v2_22
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 1536
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4afb3aa9de8e1aa4695df81e51a2cb52
+      internalID: 2023266882
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Palestone Tilemap v2_23
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 1536
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef9af8d70a6c7e04590703218163485b
+      internalID: -875127865
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Palestone Tilemap v2_24
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 1536
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0383a3d6154a82d46a27873ae934600d
+      internalID: -1313706735
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Palestone Tilemap v2_25
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 1536
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 14253cbf61be2594a81f526ce1a0585f
+      internalID: -551621745
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Palestone Tilemap v2_26
+      rect:
+        serializedVersion: 2
+        x: 2560
+        y: 1536
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ae60370ed6172a4aad52b45474f03a3
+      internalID: 2094760881
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Palestone Tilemap v2_27
+      rect:
+        serializedVersion: 2
+        x: 3072
+        y: 1536
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3628958e12ae2444da0a84e725ab2f8a
+      internalID: -944462283
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Palestone Tilemap v2_28
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1024
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c8c1f6df8b5bb7479d2a20377a046fe
+      internalID: -1193588902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Palestone Tilemap v2_29
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 1024
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a4754bdf16d7c34baf2a8cc91ddc9ec
+      internalID: -762076007
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Palestone Tilemap v2_30
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 1024
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc102a07b33fe7b40a737a0712fbc122
+      internalID: 2120493310
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Palestone Tilemap v2_31
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 1024
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02028128352d7f24286531980c92989e
+      internalID: 571314449
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Palestone Tilemap v2_32
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 1024
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f1711bf46dc62344f8f18f3fd9d49055
+      internalID: -825274069
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Palestone Tilemap v2_33
+      rect:
+        serializedVersion: 2
+        x: 2560
+        y: 1024
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 87e8ebbf761a39b4ca841089691a2f7d
+      internalID: -962557499
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Palestone Tilemap v2_34
+      rect:
+        serializedVersion: 2
+        x: 3072
+        y: 1024
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aac26c008f3dffb4faa56bc497e70ccb
+      internalID: -716106272
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Palestone Tilemap v2_35
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 512
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 057721341cc4e1f428b6e2fa17ee17d4
+      internalID: -2100272926
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Palestone Tilemap v2_36
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 512
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8fb91d4570d12584c8b6d1c9678ac85b
+      internalID: -996505755
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Palestone Tilemap v2_37
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 512
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de989a5f35262984ab823812c4e681a2
+      internalID: 712442564
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Palestone Tilemap v2_38
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 512
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6daf401ae1db1044998481045a9f4058
+      internalID: 1171541664
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Palestone Tilemap v2_39
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 512
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fa71470fc43489e47ba3bfc0f92feceb
+      internalID: -925720613
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Palestone Tilemap v2_40
+      rect:
+        serializedVersion: 2
+        x: 2560
+        y: 512
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 04d8a67297f827a48bfe22fbcdef8b71
+      internalID: -1243326363
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Palestone Tilemap v2_41
+      rect:
+        serializedVersion: 2
+        x: 3072
+        y: 512
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c97c0459ad8490d4c9e7b938671c24fb
+      internalID: 131160268
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Palestone Tilemap v2_42
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6ccb16ec20b6efb47835d8b8d9884b8a
+      internalID: -37166526
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Palestone Tilemap v2_43
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1bcf31d5206b65b4589f92528eded2e4
+      internalID: 68045334
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Palestone Tilemap v2_44
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 0
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd932803e823c214eb9eb33abf25d936
+      internalID: 1678475424
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Palestone Tilemap v2_45
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 0
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b4abd4629b1aed74ab47fcfbe13e2756
+      internalID: -1829582614
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Palestone Tilemap v2_46
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 0
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 540c1bb866811d64fb421f9ac6d4a379
+      internalID: 156515672
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Palestone Tilemap v2_47
+      rect:
+        serializedVersion: 2
+        x: 2560
+        y: 0
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e6178ae09717ec34e8ed7318bc1c5711
+      internalID: 996309506
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Palestone Tilemap v2_48
+      rect:
+        serializedVersion: 2
+        x: 3072
+        y: 0
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 36af6b6a0587ace4981fc049e0d0c85a
+      internalID: -1971297676
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: cd94efdc76c397a4090d8b5e047616a4
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":512.0,"y":512.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      Palestone Tilemap v2_0: -4384100988041340739
+      Palestone Tilemap v2_1: 1240757770558112814
+      Palestone Tilemap v2_10: -1133689105
+      Palestone Tilemap v2_11: -1173292131
+      Palestone Tilemap v2_12: 804254701
+      Palestone Tilemap v2_13: -333976079
+      Palestone Tilemap v2_14: -1926917520
+      Palestone Tilemap v2_15: 1278301000
+      Palestone Tilemap v2_16: -513701967
+      Palestone Tilemap v2_17: -698523494
+      Palestone Tilemap v2_18: -47797080
+      Palestone Tilemap v2_19: 2063310250
+      Palestone Tilemap v2_2: 2561928964531367967
+      Palestone Tilemap v2_20: -2014777791
+      Palestone Tilemap v2_21: -1095896033
+      Palestone Tilemap v2_22: 2023266882
+      Palestone Tilemap v2_23: -875127865
+      Palestone Tilemap v2_24: -1313706735
+      Palestone Tilemap v2_25: -551621745
+      Palestone Tilemap v2_26: 2094760881
+      Palestone Tilemap v2_27: -944462283
+      Palestone Tilemap v2_28: -1193588902
+      Palestone Tilemap v2_29: -762076007
+      Palestone Tilemap v2_3: -5182062414157248531
+      Palestone Tilemap v2_30: 2120493310
+      Palestone Tilemap v2_31: 571314449
+      Palestone Tilemap v2_32: -825274069
+      Palestone Tilemap v2_33: -962557499
+      Palestone Tilemap v2_34: -716106272
+      Palestone Tilemap v2_35: -2100272926
+      Palestone Tilemap v2_36: -996505755
+      Palestone Tilemap v2_37: 712442564
+      Palestone Tilemap v2_38: 1171541664
+      Palestone Tilemap v2_39: -925720613
+      Palestone Tilemap v2_4: -4726838971086135854
+      Palestone Tilemap v2_40: -1243326363
+      Palestone Tilemap v2_41: 131160268
+      Palestone Tilemap v2_42: -37166526
+      Palestone Tilemap v2_43: 68045334
+      Palestone Tilemap v2_44: 1678475424
+      Palestone Tilemap v2_45: -1829582614
+      Palestone Tilemap v2_46: 156515672
+      Palestone Tilemap v2_47: 996309506
+      Palestone Tilemap v2_48: -1971297676
+      Palestone Tilemap v2_5: -967983721654167009
+      Palestone Tilemap v2_6: -5422048195710402874
+      Palestone Tilemap v2_7: 490331980
+      Palestone Tilemap v2_8: -46738319
+      Palestone Tilemap v2_9: -480099586
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
