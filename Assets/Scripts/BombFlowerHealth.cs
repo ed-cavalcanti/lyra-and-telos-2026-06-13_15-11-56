@@ -91,6 +91,8 @@ public class BombFlowerHealth : MonoBehaviour
             Instantiate(explosionParticles, transform.position, Quaternion.identity);
         }
 
+        AudioManager.Instance.PlaySFX("FlowerExplode");
+
         // Causa dano em área usando física 2D
         Collider2D[] hitObjects = Physics2D.OverlapCircleAll(transform.position, explosionRadius);
         foreach (Collider2D hit in hitObjects)

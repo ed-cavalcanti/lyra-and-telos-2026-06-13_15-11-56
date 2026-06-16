@@ -4,32 +4,37 @@ using UnityEngine.SceneManagement;
 public class GameOverManager : MonoBehaviour
 {
     [Header("Referências de UI")]
-    [SerializeField] private GameObject gameOverPanel; // Arraste o GameOver_Panel aqui
+    [SerializeField] private GameObject gameOverPanel;
 
     public void ExibirGameOver()
     {
         gameOverPanel.SetActive(true);
-        Time.timeScale = 0f;
+        Time.timeScale = 0f; // Pausa o jogo
     }
 
-    // === NOVO: Método que o seu botão de "Continuar" vai chamar ===
     public void ContinuarDoCheckpoint()
     {
-        // 1. O tempo volta a correr
+        // 1. O tempo volta a correr imediatamente
         Time.timeScale = 1f;
 
-        // 2. Esconde a tela de morte
-        gameOverPanel.SetActive(false);
-
-        // 3. Encontra o jogador na cena e manda ele reviver no checkpoint
-        PlayerHealth player = FindAnyObjectByType<PlayerHealth>();
-        if (player != null)
+        // 2. ESCONDE O MENU IMEDIATAMENTE (Assim o Fade acontece sobre o jogo!)
+        if (gameOverPanel != null)
         {
-            player.RespawnAtCheckpoint();
+            gameOverPanel.SetActive(false);
         }
+
+        // 3. Inicia a transição de tela preta
+        TransitionManager.Instance.DoTransition(() =>
+        {
+            // TUDO AQUI DENTRO SÓ ACONTECE NO ESCURO (O teleporte)
+            PlayerHealth player = FindAnyObjectByType<PlayerHealth>();
+            if (player != null)
+            {
+                player.RespawnAtCheckpoint();
+            }
+        });
     }
 
-    // Mantive a função original caso você queira um botão de "Reiniciar Fase Inteira"
     public void ReiniciarCena()
     {
         Time.timeScale = 1f;

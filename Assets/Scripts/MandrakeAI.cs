@@ -182,6 +182,7 @@ public class MandrakeAI : MonoBehaviour
     {
         if (Time.time >= nextAttackTime)
         {
+            AudioManager.Instance.PlaySFX("MandrakeAttack");
             float xDifference = player.position.x - transform.position.x;
             float direction = isFacingRight ? 1f : -1f;
 

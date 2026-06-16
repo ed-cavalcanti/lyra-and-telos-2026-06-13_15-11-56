@@ -50,6 +50,11 @@ public class Projectile : MonoBehaviour
             // O script da planta aceita de onde o dano veio (transform) para calcular knockback
             plantHealth.TakeDamage(damage, transform);
         }
+        // === NOVO: Tenta achar o Chefão ===
+        else if (other.TryGetComponent(out BossController bossHealth))
+        {
+            bossHealth.TakeDamage(damage);
+        }
 
         SpawnHitEffect();
         Destroy(gameObject);

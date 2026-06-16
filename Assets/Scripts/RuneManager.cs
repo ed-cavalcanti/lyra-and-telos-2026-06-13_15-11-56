@@ -1,110 +1,153 @@
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections; // NOVO: Necessário para usar Coroutines
 
 public class RuneManager : MonoBehaviour
 {
     public static RuneManager Instance { get; private set; }
 
     [Header("Configurações da Interface (UI)")]
-    [Tooltip("O GameObject pai (Painel) que segura todas as imagens das runas")]
-    [SerializeField] private GameObject runeUIPanel; 
-    [Tooltip("Tempo em segundos que a UI fica na tela antes de sumir")]
-    [SerializeField] private float displayDuration = 3f;
-
-    [Space]
-    [Tooltip("Arraste as imagens das runas do Canvas na ordem (ex: Runa 1, Runa 2, Runa 3)")]
+    [SerializeField] private GameObject runeUIPanel;
     [SerializeField] private Image[] runeUISlots;
     [SerializeField] private Color collectedColor = Color.white;
     [SerializeField] private Color uncollectedColor = new Color(0.2f, 0.2f, 0.2f, 1f);
 
-    [Header("Portal")]
-    [SerializeField] private GameObject portal;
+    [Header("Fase 1 (Transição)")]
+    [SerializeField] private int runesToFinishPhase1 = 3;
+    [SerializeField] private GameObject portalPhase1;
+    [SerializeField] private Transform teleportPointPhase2;
 
-    private bool[] collectedRunes;
-    private Coroutine hideUICoroutine; // Guarda a contagem atual para podermos resetá-la
+    [Header("Fase 2 (Fim)")]
+    [SerializeField] private GameObject finalPortal;
+    // === NOVO: Ponto de teleporte final ===
+    [SerializeField] private Transform teleportPointFinal;
+
+    [Header("Referências")]
+    [SerializeField] private Transform playerTransform;
+
+    // Variáveis Estáticas (Sobrevivem à troca de cena)
+    private static bool[] globalCollectedRunes;
+    private static int globalTotalRunesCollected = 0;
+    private static bool isMemoryInitialized = false;
 
     private void Awake()
     {
         if (Instance == null) Instance = this;
-        else Destroy(gameObject);
+        else { Destroy(gameObject); return; }
 
-        collectedRunes = new bool[runeUISlots.Length];
-
-        foreach (Image img in runeUISlots)
+        if (!isMemoryInitialized)
         {
-            if (img != null) img.color = uncollectedColor;
+            globalCollectedRunes = new bool[runeUISlots.Length];
+            globalTotalRunesCollected = 0;
+            isMemoryInitialized = true;
         }
 
-        // NOVO: Garante que o painel da UI comece invisível
-        if (runeUIPanel != null) runeUIPanel.SetActive(false);
+        for (int i = 0; i < runeUISlots.Length; i++)
+        {
+            if (runeUISlots[i] != null)
+            {
+                runeUISlots[i].color = globalCollectedRunes[i] ? collectedColor : uncollectedColor;
+            }
+        }
 
-        if (portal != null) portal.SetActive(false);
+        if (runeUIPanel != null) runeUIPanel.SetActive(true);
+
+        if (portalPhase1 != null) portalPhase1.SetActive(false);
+        if (finalPortal != null) finalPortal.SetActive(false);
     }
 
     public void CollectRune(int runeIndex)
     {
-        if (runeIndex < 0 || runeIndex >= collectedRunes.Length) return;
+        if (runeIndex < 0 || runeIndex >= globalCollectedRunes.Length) return;
 
-        if (!collectedRunes[runeIndex])
+        if (!globalCollectedRunes[runeIndex])
         {
-            collectedRunes[runeIndex] = true;
-            
+            globalCollectedRunes[runeIndex] = true;
+            globalTotalRunesCollected++;
+
             if (runeUISlots[runeIndex] != null)
             {
                 runeUISlots[runeIndex].color = collectedColor;
             }
 
-            // NOVO: Mostra a UI e inicia o temporizador
-            ShowUI();
-
-            CheckWinCondition();
+            CheckProgression();
         }
     }
 
-    private void ShowUI()
+    private void CheckProgression()
     {
-        if (runeUIPanel != null)
+        // SEGURANÇA: Se a referência do jogador foi perdida na troca de cena, busca o novo jogador!
+        if (playerTransform == null)
         {
-            runeUIPanel.SetActive(true); // Liga o painel
+            PlayerHealth player = FindAnyObjectByType<PlayerHealth>();
+            if (player != null) playerTransform = player.transform;
+        }
 
-            // Se já tiver uma contagem regressiva rodando, nós a cancelamos
-            // Isso evita que a UI suma muito rápido se o jogador pegar duas runas seguidas
-            if (hideUICoroutine != null)
+        // O jogador pegou as 3 runas (Fase 1)
+        if (globalTotalRunesCollected == runesToFinishPhase1)
+        {
+            Debug.Log("Fase 1 concluída! Ativando portal 1 e teleportando...");
+
+            if (portalPhase1 != null) portalPhase1.SetActive(true);
+
+            if (playerTransform != null && teleportPointPhase2 != null)
             {
-                StopCoroutine(hideUICoroutine);
+                TransitionManager.Instance.DoTransition(() =>
+                {
+                    playerTransform.position = teleportPointPhase2.position;
+                    CortarCameraPara(teleportPointPhase2.position);
+                });
             }
+        }
+        // O jogador pegou as 5 runas (Fase 2)
+        else if (globalTotalRunesCollected == globalCollectedRunes.Length)
+        {
+            Debug.Log("Todas as 5 runas coletadas! Abrindo o portal final...");
 
-            // Inicia uma nova contagem do zero
-            hideUICoroutine = StartCoroutine(HideUIAfterDelay());
+            if (finalPortal != null) finalPortal.SetActive(true);
+
+            // === NOVO: LÓGICA DO TELEPORTE FINAL ===
+            if (playerTransform != null && teleportPointFinal != null)
+            {
+                TransitionManager.Instance.DoTransition(() =>
+                {
+                    playerTransform.position = teleportPointFinal.position;
+                    CortarCameraPara(teleportPointFinal.position);
+                });
+            }
         }
     }
 
-    // A Coroutine que conta o tempo
-    private IEnumerator HideUIAfterDelay()
+    // Função criada para organizar o código e não repetir a lógica da câmera duas vezes
+    private void CortarCameraPara(Vector3 novaPosicao)
     {
-        // Pausa a execução deste bloco pelo tempo determinado
-        yield return new WaitForSeconds(displayDuration);
-        
-        // Desliga o painel após o tempo passar
-        if (runeUIPanel != null)
+        Camera mainCam = Camera.main;
+        if (mainCam != null)
         {
-            runeUIPanel.SetActive(false);
+            mainCam.transform.position = new Vector3(novaPosicao.x, novaPosicao.y, mainCam.transform.position.z);
+            Behaviour cinemachineBrain = (Behaviour)mainCam.GetComponent("CinemachineBrain");
+            if (cinemachineBrain != null)
+            {
+                cinemachineBrain.enabled = false;
+                cinemachineBrain.enabled = true;
+            }
         }
     }
 
-    private void CheckWinCondition()
+    public void RegistrarPortalFinal(GameObject portal, Transform teleportPoint)
     {
-        foreach (bool rune in collectedRunes)
+        finalPortal = portal;
+        teleportPointFinal = teleportPoint;
+
+        // Verifica se o jogador já pegou todas as runas (caso raro, mas previne bugs)
+        if (globalTotalRunesCollected == globalCollectedRunes.Length)
         {
-            if (!rune) return; 
+            if (finalPortal != null) finalPortal.SetActive(true);
+        }
+        else
+        {
+            if (finalPortal != null) finalPortal.SetActive(false);
         }
 
-        Debug.Log("Todas as runas coletadas! Abrindo o portal...");
-        
-        if (portal != null)
-        {
-            portal.SetActive(true);
-        }
+        Debug.Log("RuneManager: Portal Final conectado com sucesso na nova cena!");
     }
 }

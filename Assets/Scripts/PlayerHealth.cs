@@ -1,9 +1,10 @@
 using UnityEngine;
 using UnityEngine.Events;
-using TarodevController; // Necessário para acessar o PlayerController
+using TarodevController;
 
 public class PlayerHealth : MonoBehaviour
 {
+    public static int globalSavedHealth = -1;
     [Header("Vida")]
     [SerializeField] private int maxHealth = 5;
     private int currentHealth;
@@ -27,8 +28,9 @@ public class PlayerHealth : MonoBehaviour
     private Rigidbody2D rb;
     private Color originalColor;
 
-    // === NOVO: Variável para guardar o Checkpoint ===
+    // === VARIÁVEIS DE CONTROLE ADICIONADAS AQUI ===
     private Vector2 lastCheckpointPosition;
+    private bool isDead = false; // Aqui está ela!
 
     private void Awake()
     {
@@ -39,17 +41,28 @@ public class PlayerHealth : MonoBehaviour
             originalColor = spriteRenderer.color;
     }
 
-    private void Start()
+private void Start()
     {
-        // Define a posição inicial como o primeiro checkpoint padrão
         lastCheckpointPosition = transform.position;
+
+        // Se o jogador veio de outra fase, recupera a vida dele
+        if (globalSavedHealth != -1) 
+        {
+            currentHealth = globalSavedHealth;
+        }
+        else 
+        {
+            currentHealth = maxHealth;
+        }
     }
 
     public void TakeDamage(int amount, Transform damageSource = null)
     {
-        if (isInvincible) return;
+        // Trava: Se estiver invencível OU já estiver morto, ignora o dano!
+        if (isInvincible || isDead) return;
 
         currentHealth -= amount;
+        globalSavedHealth = currentHealth;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
         OnHealthChanged?.Invoke(currentHealth, maxHealth);
         Debug.Log($"[Player] Vida: {currentHealth}/{maxHealth}");
@@ -71,7 +84,6 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    // === NOVO: Método para a estátua chamar e salvar a posição ===
     public void SetCheckpoint(Vector2 newPosition)
     {
         lastCheckpointPosition = newPosition;
@@ -110,26 +122,48 @@ public class PlayerHealth : MonoBehaviour
 
     private void Die()
     {
+        isDead = true;
+
+        // Trava o personagem e zera o movimento ao morrer
+        TarodevController.PlayerController controller = GetComponent<TarodevController.PlayerController>();
+        if (controller != null) controller.enabled = false;
+        if (rb != null) rb.linearVelocity = Vector2.zero;
+
+        // Aciona o Menu de Game Over via Unity Event
         OnDeath?.Invoke();
     }
 
     public void RespawnAtCheckpoint()
     {
-        // 1. Restaura a vida inteira
         Heal(maxHealth);
+        if (rb != null) rb.linearVelocity = Vector2.zero;
 
-        // 2. Teleporta o jogador de volta para a estátua
+        // Teleporta e devolve o controle
         TarodevController.PlayerController controller = GetComponent<TarodevController.PlayerController>();
         if (controller != null)
         {
             controller.TeleportTo(lastCheckpointPosition);
+            controller.enabled = true;
         }
         else
         {
             transform.position = lastCheckpointPosition;
         }
 
-        Debug.Log("Player renasceu no checkpoint: " + lastCheckpointPosition);
+        // Corta o Cinemachine (Evita o deslize de câmera)
+        Camera mainCam = Camera.main;
+        if (mainCam != null)
+        {
+            mainCam.transform.position = new Vector3(lastCheckpointPosition.x, lastCheckpointPosition.y, mainCam.transform.position.z);
+            Behaviour cinemachineBrain = (Behaviour)mainCam.GetComponent("CinemachineBrain");
+            if (cinemachineBrain != null)
+            {
+                cinemachineBrain.enabled = false;
+                cinemachineBrain.enabled = true;
+            }
+        }
+
+        isDead = false; // Tira a trava, o jogador está vivo de novo
     }
 
     public int GetCurrentHealth() => currentHealth;
@@ -138,6 +172,7 @@ public class PlayerHealth : MonoBehaviour
     public void Heal(int amount)
     {
         currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
+        globalSavedHealth = currentHealth;
         OnHealthChanged?.Invoke(currentHealth, maxHealth);
     }
 }

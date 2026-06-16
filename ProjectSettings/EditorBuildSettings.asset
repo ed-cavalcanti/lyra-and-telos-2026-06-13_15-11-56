@@ -9,11 +9,26 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: cfe6f15dae3a8fc449f11a5b257de986
   - enabled: 1
-    path: Assets/Scenes/Palestone.unity
-    guid: 78d5107d7b28b0a4a88088b6e66108f5
-  - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
-    guid: 8c9cfa26abfee488c85f1582747f6a02
+    path: Assets/Scenes/StartCutscene.unity
+    guid: c4e51fae57fa4f44799037d6a2dfdc45
+  - enabled: 1
+    path: Assets/Scenes/Palestone2.unity
+    guid: 5830c2367c82b024b8d939b9aae1d3b4
+  - enabled: 1
+    path: Assets/Scenes/ForestCutscene.unity
+    guid: a64b3376c8c7d2d4a830dea07f26f7c0
+  - enabled: 1
+    path: Assets/Scenes/WhispersForest.unity
+    guid: d825c8d81c3249b4c8cd28f5127d1027
+  - enabled: 1
+    path: Assets/Scenes/BossCutscene.unity
+    guid: 8f977e4d83914954c9065cac543b70a0
+  - enabled: 1
+    path: Assets/Scenes/BossFight.unity
+    guid: 590ccf4ddc8d6b14990e4d16ccd2479f
+  - enabled: 1
+    path: Assets/Scenes/BossDeathCutscene.unity
+    guid: 7397d12bc155943448e6fb5fff7cdd79
   m_configObjects:
     com.unity.dt.app-ui: {fileID: 11400000, guid: 1b1c20d82303e4b5781c3ef50ac1449f, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}

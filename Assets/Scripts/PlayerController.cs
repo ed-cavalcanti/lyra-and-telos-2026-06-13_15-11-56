@@ -105,15 +105,32 @@ namespace TarodevController
             // Detecta os inimigos no alcance
             Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(_attackPoint.position, _attackRange, _enemyLayers);
 
-            // Aplica o dano
+            // Aplica o dan
             foreach (Collider2D enemy in hitEnemies)
             {
+                // 1. Tenta ver se é um inimigo comu
                 EnemyHealth enemyHealth = enemy.GetComponent<EnemyHealth>();
-
                 if (enemyHealth != null)
                 {
                     enemyHealth.TakeDamage(_attackDamage, transform);
                     Debug.Log($"[Animation Event] Acertou {enemy.name} e causou {_attackDamage} de dano!");
+                }
+
+                // 2. Tenta ver se é a Flor Bomb
+                BombFlowerHealth flowerHealth = enemy.GetComponent<BombFlowerHealth>();
+                if (flowerHealth != null)
+                {
+                    flowerHealth.TakeDamage(_attackDamage, transform);
+                    Debug.Log($"[Animation Event] Acertou {enemy.name} (Flor) e causou {_attackDamage} de dano!");
+                }
+
+                // 3. Tenta ver se é o Chefão (NOVO)
+                BossController bossHealth = enemy.GetComponent<BossController>();
+                if (bossHealth != null)
+                {
+                    // Usa a função de dano do boss passando o valor _attackDamag
+                    bossHealth.TakeDamage(_attackDamage);
+                    Debug.Log($"[Animation Event] Acertou o Chefão e causou {_attackDamage} de dano!");
                 }
             }
         }

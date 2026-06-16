@@ -44,7 +44,7 @@ public class BombFlowerAI : MonoBehaviour
             {
                 // Acorda a planta
                 isAwake = true;
-                animator.SetTrigger(WakeUpHash); 
+                animator.SetTrigger(WakeUpHash);
                 nextFireTime = Time.time + 1f; // Dá 1 segundo para a animação de acordar tocar antes de atirar
             }
             else
@@ -89,6 +89,7 @@ public class BombFlowerAI : MonoBehaviour
 
         if (proj.TryGetComponent(out BombFlowerProjectile projectileScript))
         {
+            AudioManager.Instance.PlaySFX("GargoyleProjectile");
             projectileScript.Initialize(direction);
         }
     }

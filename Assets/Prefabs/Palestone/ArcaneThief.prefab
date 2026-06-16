@@ -220,9 +220,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   chaseRange: 10
-  attackRange: 2
+  attackRange: 1.4
   attackCooldown: 2
-  attackOffsetX: 1.2
+  attackOffsetX: 0.8
   attackOffsetY: 0
   attackRadius: 0.5
   playerLayer:
