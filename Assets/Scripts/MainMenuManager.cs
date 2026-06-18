@@ -5,12 +5,26 @@ using TMPro;
 public class MainMenuManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI highScoreText;
-    
+
     // Trava para evitar que o jogador clique várias vezes no botão "Jogar"
     private bool isStartingGame = false;
 
     void Start()
     {
+        // === RESET DO JOGO (ROGUELIKE) ===
+        // 1. Reseta a memória das runas coletadas
+        RuneManager.ResetarMemoriaDasRunas();
+
+        // 2. Reseta a vida global salva do jogador para o padrão (-1)
+        PlayerHealth.globalSavedHealth = -1;
+
+        // 3. Garante que o tempo do jogo está rodando normalmente 
+        // (Previne que o jogo fique travado se o jogador voltar pro menu a partir da tela de Game Over)
+        Time.timeScale = 1f;
+
+        Debug.Log("[MainMenuManager] O progresso do jogo foi resetado com sucesso!");
+        // ==================================
+
         // Exibe o recorde salvo ao abrir o menu
         int recorde = PlayerPrefs.GetInt("HighScore", 0);
         if (highScoreText != null)
@@ -21,7 +35,7 @@ public class MainMenuManager : MonoBehaviour
     {
         // Se já estiver carregando o jogo, ignora os próximos cliques
         if (isStartingGame) return;
-        
+
         isStartingGame = true;
 
         // Tenta encontrar o TransitionManager na cena
@@ -34,7 +48,7 @@ public class MainMenuManager : MonoBehaviour
         // Se achou o gerenciador, faz o fade e carrega a cena no escuro
         if (tm != null)
         {
-            tm.DoTransition(() => 
+            tm.DoTransition(() =>
             {
                 SceneManager.LoadScene("StartCutscene");
             });

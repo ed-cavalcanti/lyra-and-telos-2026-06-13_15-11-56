@@ -66,7 +66,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 76.7, y: 27.56, z: 0}
-  m_LocalScale: {x: 1.4, y: 1.4, z: 1.0692514}
+  m_LocalScale: {x: 1.4, y: 1.4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2004023522771658901}
@@ -395,7 +395,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerShoot
   projectilePrefab: {fileID: 7153970041096138883, guid: caf20154943ae65479ef1ef3c2f2e777, type: 3}
   firePoint: {fileID: 2004023522771658901}
-  chargeTime: 1
+  chargeTime: 0.8
   attackKey: 25
   playerSprite: {fileID: 401869422622480721}
 --- !u!114 &8879774674101079885

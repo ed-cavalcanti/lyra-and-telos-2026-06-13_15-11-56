@@ -1,103 +1,58 @@
 using UnityEngine;
+using System;
 using System.Collections;
-using System; // Necessário para passarmos ações (callbacks)
+using UnityEngine.SceneManagement;
 
 public class TransitionManager : MonoBehaviour
 {
     public static TransitionManager Instance { get; private set; }
 
     [Header("Configurações")]
-    [Tooltip("Arraste o Canvas Group da tela preta aqui")]
     [SerializeField] private CanvasGroup fadeCanvasGroup;
-    [Tooltip("Tempo em segundos que o Fade leva para acontecer")]
     [SerializeField] private float fadeDuration = 1f;
-    [SerializeField] private bool fadeFromBlackOnStart = true; // NOVO CAMPO
+
+    private bool isTransitioning = false;
+    private Coroutine activeCoroutine;
 
     private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
+            transform.SetParent(null);
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
+            if (fadeCanvasGroup != null && fadeCanvasGroup.gameObject != gameObject)
+            {
+                Destroy(fadeCanvasGroup.gameObject);
+            }
             Destroy(gameObject);
+            return;
         }
     }
 
     private void Start()
     {
-        // NOVO LÓGICA DE START
-        if (fadeFromBlackOnStart)
-        {
-            // Trava a tela no preto absoluto e bloqueia cliques
-            fadeCanvasGroup.alpha = 1f;
-            fadeCanvasGroup.blocksRaycasts = true;
+        // Garante que a tela sempre clareie e libere os cliques 
+        // quando o jogo é aberto pela primeira vez no Menu Principal
+        fadeCanvasGroup.blocksRaycasts = false;
 
-            // Chama a sua própria função para clarear a tela
-            FadeFromBlack();
-        }
-        else
+        if (fadeCanvasGroup.alpha > 0f)
         {
-            // Comportamento original: começa com a tela limpa imediatamente
-            fadeCanvasGroup.alpha = 0f;
-            fadeCanvasGroup.blocksRaycasts = false;
+            StartCoroutine(Fade(fadeCanvasGroup.alpha, 0f));
         }
     }
 
-    // --------------------------------------------------------
-    // FUNÇÕES PÚBLICAS PARA VOCÊ CHAMAR EM QUALQUER SCRIPT
-    // --------------------------------------------------------
-
-    /// Escurece a tela até ficar 100% preta
-    public void FadeToBlack()
-    {
-        StartCoroutine(FadeRoutine(1f));
-    }
-
-    /// Clareia a tela até sumir o preto
-    public void FadeFromBlack()
-    {
-        StartCoroutine(FadeRoutine(0f));
-    }
-
-    /// Faz o ciclo completo: Escurece, Executa seu código, e Clareia de volta.
-    private bool isTransitioning = false; // Trava de segurança para impedir múltiplas transições
-
+    // =========================================================
+    // 1. PARA TELEPORTES (Mesma Cena)
+    // =========================================================
     public void DoTransition(Action actionInTheDark)
     {
-        // Se já estiver no meio de uma transição, ignora os novos chamados
         if (isTransitioning) return;
-
-        StartCoroutine(TransitionCycleRoutine(actionInTheDark));
-    }
-
-    // --------------------------------------------------------
-    // LÓGICA INTERNA (COROUTINES)
-    // --------------------------------------------------------
-
-    private IEnumerator FadeRoutine(float targetAlpha)
-    {
-        // Bloqueia cliques do jogador enquanto a tela estiver preta
-        fadeCanvasGroup.blocksRaycasts = true;
-
-        float startAlpha = fadeCanvasGroup.alpha;
-        float timeElapsed = 0f;
-
-        while (timeElapsed < fadeDuration)
-        {
-            timeElapsed += Time.deltaTime;
-            fadeCanvasGroup.alpha = Mathf.Lerp(startAlpha, targetAlpha, timeElapsed / fadeDuration);
-            yield return null; // Espera o próximo frame
-        }
-
-        fadeCanvasGroup.alpha = targetAlpha;
-
-        // Se a tela clareou totalmente, libera os cliques do mouse
-        if (targetAlpha == 0f)
-        {
-            fadeCanvasGroup.blocksRaycasts = false;
-        }
+        if (activeCoroutine != null) StopCoroutine(activeCoroutine);
+        activeCoroutine = StartCoroutine(TransitionCycleRoutine(actionInTheDark));
     }
 
     private IEnumerator TransitionCycleRoutine(Action actionInTheDark)
@@ -105,38 +60,69 @@ public class TransitionManager : MonoBehaviour
         isTransitioning = true;
         fadeCanvasGroup.blocksRaycasts = true;
 
-        // 1. FADE IN (Escurecer)
-        float elapsed = 0f;
-        while (elapsed < fadeDuration)
-        {
-            // Time.unscaledDeltaTime ignora qualquer pausa ou slowdown no jogo
-            elapsed += Time.unscaledDeltaTime;
-            fadeCanvasGroup.alpha = Mathf.Lerp(0f, 1f, elapsed / fadeDuration);
-            yield return null; // Espera o processamento do próximo frame
-        }
+        // FADE IN
+        yield return Fade(0f, 1f);
 
-        fadeCanvasGroup.alpha = 1f; // Garante que cravou em 100%
-
-        // O SEGREDO AQUI: Obriga o Unity a desenhar a tela preta no monitor ANTES de continuar o código
-        yield return new WaitForEndOfFrame();
-
-        // 2. EXECUTA O TELEPORTE (Agora sim, no escuro absoluto)
+        // EXECUTA A AÇÃO (Ex: Mudar o jogador de posição)
         actionInTheDark?.Invoke();
-
-        // 3. Pausa de segurança no escuro para garantir que a câmera e física se estabilizaram
         yield return new WaitForSecondsRealtime(0.2f);
 
-        // 4. FADE OUT (Clarear)
-        elapsed = 0f;
-        while (elapsed < fadeDuration)
+        // FADE OUT
+        yield return Fade(1f, 0f);
+
+        fadeCanvasGroup.blocksRaycasts = false;
+        isTransitioning = false;
+    }
+
+    // =========================================================
+    // 2. PARA MUDAR DE CENA (Com Carregamento Assíncrono)
+    // =========================================================
+    public void TransitionToScene(string sceneName)
+    {
+        if (isTransitioning) return;
+        if (activeCoroutine != null) StopCoroutine(activeCoroutine);
+        activeCoroutine = StartCoroutine(LoadSceneRoutine(sceneName));
+    }
+
+    private IEnumerator LoadSceneRoutine(string sceneName)
+    {
+        isTransitioning = true;
+        fadeCanvasGroup.blocksRaycasts = true;
+
+        // FADE IN
+        yield return Fade(0f, 1f);
+
+        // INICIA O CARREGAMENTO NO MODO ASSÍNCRONO
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
+
+        // Espera pacientemente até que o Unity diga que a cena carregou 100%
+        while (!asyncLoad.isDone)
         {
-            elapsed += Time.unscaledDeltaTime;
-            fadeCanvasGroup.alpha = Mathf.Lerp(1f, 0f, elapsed / fadeDuration);
             yield return null;
         }
 
-        fadeCanvasGroup.alpha = 0f;
+        // Dá 1 frame extra de respiro para que todos os Start() e Awake() da nova cena terminem
+        yield return new WaitForEndOfFrame();
+
+        // FADE OUT
+        yield return Fade(1f, 0f);
+
         fadeCanvasGroup.blocksRaycasts = false;
-        isTransitioning = false; // Libera a trava para futuras transições
+        isTransitioning = false;
+    }
+
+    // =========================================================
+    // FUNÇÃO AUXILIAR DE FADE
+    // =========================================================
+    private IEnumerator Fade(float startAlpha, float targetAlpha)
+    {
+        float elapsed = 0f;
+        while (elapsed < fadeDuration)
+        {
+            elapsed += Time.unscaledDeltaTime;
+            fadeCanvasGroup.alpha = Mathf.Lerp(startAlpha, targetAlpha, elapsed / fadeDuration);
+            yield return null;
+        }
+        fadeCanvasGroup.alpha = targetAlpha;
     }
 }

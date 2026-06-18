@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
-using UnityEngine.InputSystem; // NOVO: Importa o sistema de controles moderno
+using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement; // Adicionado para carregar a cena caso o TransitionManager falhe
 
 public class CutsceneManager : MonoBehaviour
 {
@@ -29,25 +29,23 @@ public class CutsceneManager : MonoBehaviour
 
     private void Update()
     {
-        // NOVO: Usa a nossa função adaptada para o novo Input System
         if (WasAnyButtonPressed() && !isTransitioning)
         {
             AdvanceCutscene();
         }
     }
 
-    // NOVO: Função que verifica o teclado, mouse e controle pelo novo sistema
     private bool WasAnyButtonPressed()
     {
-        // 1. Verifica se qualquer tecla do teclado foi pressionada
+        // 1. Verifica teclado
         if (Keyboard.current != null && Keyboard.current.anyKey.wasPressedThisFrame)
             return true;
 
-        // 2. Verifica se o botão esquerdo do mouse foi clicado
+        // 2. Verifica mouse
         if (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame)
             return true;
 
-        // 3. Verifica se o botão principal do controle (A no Xbox / X no PlayStation) foi apertado
+        // 3. Verifica controle (A / X)
         if (Gamepad.current != null && Gamepad.current.buttonSouth.wasPressedThisFrame)
             return true;
 
@@ -61,38 +59,49 @@ public class CutsceneManager : MonoBehaviour
 
         if (currentIndex < cutscenePanels.Length)
         {
-            TransitionManager.Instance.DoTransition(() =>
+            // BLINDAGEM: Verifica se o TransitionManager existe para fazer a transição de imagens
+            if (TransitionManager.Instance != null)
             {
+                TransitionManager.Instance.DoTransition(() =>
+                {
+                    displayImage.sprite = cutscenePanels[currentIndex];
+                });
+            }
+            else
+            {
+                Debug.LogWarning("[CutsceneManager] TransitionManager não encontrado! Trocando de imagem diretamente.");
                 displayImage.sprite = cutscenePanels[currentIndex];
-            });
+            }
 
+            // Chama a função que destrava o clique após 2.5 segundos
             Invoke(nameof(UnlockTransition), 2.5f);
         }
         else
         {
-            TransitionManager.Instance.DoTransition(() =>
+            // Fim da cutscene: Carrega a próxima fase
+            if (!string.IsNullOrEmpty(nextSceneName))
             {
-                LoadNextScene();
-            });
+                // BLINDAGEM: Verifica se o TransitionManager existe para trocar de cena
+                if (TransitionManager.Instance != null)
+                {
+                    TransitionManager.Instance.TransitionToScene(nextSceneName);
+                }
+                else
+                {
+                    Debug.LogWarning("[CutsceneManager] TransitionManager não encontrado! Carregando a cena diretamente.");
+                    SceneManager.LoadScene(nextSceneName);
+                }
+            }
+            else
+            {
+                Debug.LogWarning("[CutsceneManager] O nome da próxima cena não foi preenchido no Inspector!");
+            }
         }
     }
 
+    // Função que foi restaurada: ela permite que o jogador clique novamente
     private void UnlockTransition()
     {
         isTransitioning = false;
-    }
-
-    private void LoadNextScene()
-    {
-        Debug.Log($"[CutsceneManager] Carregando a cena: {nextSceneName}");
-
-        if (!string.IsNullOrEmpty(nextSceneName))
-        {
-            SceneManager.LoadScene(nextSceneName);
-        }
-        else
-        {
-            Debug.LogWarning("[CutsceneManager] O nome da próxima cena não foi preenchido!");
-        }
     }
 }

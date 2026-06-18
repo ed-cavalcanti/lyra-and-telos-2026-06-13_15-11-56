@@ -41,19 +41,22 @@ public class PlayerHealth : MonoBehaviour
             originalColor = spriteRenderer.color;
     }
 
-private void Start()
+    private void Start()
     {
         lastCheckpointPosition = transform.position;
 
         // Se o jogador veio de outra fase, recupera a vida dele
-        if (globalSavedHealth != -1) 
+        if (globalSavedHealth != -1)
         {
             currentHealth = globalSavedHealth;
         }
-        else 
+        else
         {
             currentHealth = maxHealth;
         }
+
+        // A MÁGICA FINAL: Avisa o HUD para desenhar os corações corretos logo no frame 1!
+        OnHealthChanged?.Invoke(currentHealth, maxHealth);
     }
 
     public void TakeDamage(int amount, Transform damageSource = null)

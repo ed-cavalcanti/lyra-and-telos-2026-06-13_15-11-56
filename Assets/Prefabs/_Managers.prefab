@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6540329633810151814}
-  - component: {fileID: 2168936743309021333}
   - component: {fileID: 4063740893334698636}
   - component: {fileID: 349537425074870489}
   - component: {fileID: 4272763800713904374}
@@ -38,23 +37,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2168936743309021333
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1448609179219484656}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42dd4658ba1c2bf4ebe8e49c9fae1a76, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HealthUI
-  playerHealth: {fileID: 0}
-  heartsParent: {fileID: 0}
-  heartPrefab: {fileID: 4883686753540778011, guid: 57cd9ef62408a6841a58c06332134e83, type: 3}
-  fullHeart: {fileID: 21300000, guid: 6e6b503e8eb5a144c8f66dd8d8e45b4d, type: 3}
-  emptyHeart: {fileID: 21300000, guid: e691bfa6ce97a7c4983188c6474fa801, type: 3}
 --- !u!114 &4063740893334698636
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -124,6 +106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc00cdc3af653904e8c0ae0a0afe8c5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  ocultarInterfaceNestaCena: 0
   runeUIPanel: {fileID: 0}
   runeUISlots:
   - {fileID: 0}
@@ -135,7 +118,10 @@ MonoBehaviour:
   uncollectedColor: {r: 0.5377358, g: 0.5377358, b: 0.5377358, a: 1}
   runesToFinishPhase1: 3
   portalPhase1: {fileID: 0}
+  teleportPointPhase2: {fileID: 0}
   finalPortal: {fileID: 0}
+  teleportPointFinal: {fileID: 0}
+  playerTransform: {fileID: 0}
 --- !u!114 &9035909262808552598
 MonoBehaviour:
   m_ObjectHideFlags: 0

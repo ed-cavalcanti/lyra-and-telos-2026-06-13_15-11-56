@@ -39,7 +39,7 @@ public class EnemyProjectile : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         // Ignora colisão com o próprio boss, com os olhos ou outros inimigos
-        if (other.CompareTag("Boss") || other.CompareTag("Enemy")) return;
+        if (other.CompareTag("Boss")) return;
 
         // Verifica se acertou o jogador
         if (other.CompareTag("Player"))

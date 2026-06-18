@@ -67,6 +67,6 @@ public class PauseManager : MonoBehaviour
     public void VoltarAoMenuPrincipal()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene("MainMenu");
+        TransitionManager.Instance.TransitionToScene("MainMenu");
     }
 }

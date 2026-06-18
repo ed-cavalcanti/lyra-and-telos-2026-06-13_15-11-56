@@ -32,14 +32,21 @@ public class Portal : MonoBehaviour
         // Opcional: Adicionar um som de portal aqui
         // AudioManager.Instance.PlaySFX("PortalSound");
 
-        TransitionManager.Instance.DoTransition(() =>
+        // BLINDAGEM ANTI-BUG: Verifica se o TransitionManager existe!
+        if (TransitionManager.Instance != null)
         {
-            // === TUDO AQUI DENTRO ACONTECE NA TELA PRETA ===
+            TransitionManager.Instance.DoTransition(() =>
+            {
+                // === TUDO AQUI DENTRO ACONTECE NA TELA PRETA ===
+                SceneManager.LoadScene(sceneToLoad);
+            });
+        }
+        else
+        {
+            // Se o TransitionManager não estiver na cena, carrega a fase direto (seco)
+            Debug.LogWarning("[Portal] TransitionManager não encontrado! Trocando de cena diretamente.");
             SceneManager.LoadScene(sceneToLoad);
-            
-            // O TransitionManager continuará existindo na próxima cena 
-            // e fará o Fade Out (clarear a tela) automaticamente!
-        });
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

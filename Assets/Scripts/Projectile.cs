@@ -39,6 +39,13 @@ public class Projectile : MonoBehaviour
         // Ignora colisão com o próprio player
         if (other.CompareTag("Player")) return;
 
+        // === NOVO: IGNORA COLISÃO COM TIROS INIMIGOS ===
+        // Se o objeto atingido tiver o script da Estrela ou do Olho, passa direto!
+        if (other.GetComponent<StarProjectile>() != null || other.GetComponent<EnemyProjectile>() != null)
+        {
+            return;
+        }
+
         // Tenta achar o inimigo normal (Gárgula, etc)
         if (other.TryGetComponent(out EnemyHealth enemyHealth))
         {
@@ -50,14 +57,14 @@ public class Projectile : MonoBehaviour
             // O script da planta aceita de onde o dano veio (transform) para calcular knockback
             plantHealth.TakeDamage(damage, transform);
         }
-        // === NOVO: Tenta achar o Chefão ===
+        // Tenta achar o Chefão
         else if (other.TryGetComponent(out BossController bossHealth))
         {
             bossHealth.TakeDamage(damage);
         }
 
         SpawnHitEffect();
-        Destroy(gameObject);
+        Destroy(gameObject); // Destrói o tiro do jogador (se não tiver batido em outro tiro)
     }
 
     private void SpawnHitEffect()

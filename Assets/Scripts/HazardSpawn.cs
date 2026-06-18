@@ -32,23 +32,31 @@ public class HazardRespawn : MonoBehaviour
     {
         _isRespawning = true;
 
-        _controller.SetMovementLocked(true); // O Player agora pausa a gravidade sozinho!
+        // Trava o movimento do jogador
+        _controller.SetMovementLocked(true);
 
+        // Aplica o dano
         _health.TakeDamage(damage, null);
 
+        // Se esse dano for o suficiente para matar o jogador:
         if (_health.GetCurrentHealth() <= 0)
         {
+            // CORREÇÃO: Destrava o movimento antes de cancelar a rotina!
+            // Assim, ao clicar em "Continuar" no Game Over, o jogador volta a andar.
+            _controller.SetMovementLocked(false);
             _isRespawning = false;
-            yield break;
+
+            yield break; // Encerra a rotina do espinho (O Game Over assume daqui)
         }
 
+        // Se o jogador sobreviveu ao dano:
         yield return new WaitForSeconds(respawnDelay);
 
         Vector2 safePos = _controller.GetSafePosition();
 
-        // Como o Rigidbody continua "simulado", esta linha não vai mais causar crash!
         _controller.TeleportTo(safePos);
 
+        // Destrava o movimento após o teleporte seguro
         _controller.SetMovementLocked(false);
         _isRespawning = false;
     }

@@ -5,6 +5,10 @@ public class RuneManager : MonoBehaviour
 {
     public static RuneManager Instance { get; private set; }
 
+    [Header("Configurações da Cena")]
+    [Tooltip("Marque na cena do Boss para esconder as runas da tela")]
+    [SerializeField] private bool ocultarInterfaceNestaCena = false;
+
     [Header("Configurações da Interface (UI)")]
     [SerializeField] private GameObject runeUIPanel;
     [SerializeField] private Image[] runeUISlots;
@@ -18,7 +22,6 @@ public class RuneManager : MonoBehaviour
 
     [Header("Fase 2 (Fim)")]
     [SerializeField] private GameObject finalPortal;
-    // === NOVO: Ponto de teleporte final ===
     [SerializeField] private Transform teleportPointFinal;
 
     [Header("Referências")]
@@ -31,28 +34,61 @@ public class RuneManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null) Instance = this;
-        else { Destroy(gameObject); return; }
+        // 1. SINGLETON LOCAL: A Instância sempre será o Manager da cena ATUAL.
+        Instance = this;
 
+        // 2. Inicializa OU expande a memória das runas na memória estática
         if (!isMemoryInitialized)
         {
             globalCollectedRunes = new bool[runeUISlots.Length];
             globalTotalRunesCollected = 0;
             isMemoryInitialized = true;
+            Debug.Log($"[RuneManager] Inicializado com {runeUISlots.Length} slots");
+        }
+        // Se a fase seguinte tem mais slots, redimensiona o array mantendo os dados
+        else if (globalCollectedRunes != null && globalCollectedRunes.Length < runeUISlots.Length)
+        {
+            Debug.Log($"[RuneManager] Redimensionando runas de {globalCollectedRunes.Length} para {runeUISlots.Length} slots");
+            bool[] novaMemoria = new bool[runeUISlots.Length];
+            for (int i = 0; i < globalCollectedRunes.Length; i++)
+            {
+                novaMemoria[i] = globalCollectedRunes[i];
+            }
+            globalCollectedRunes = novaMemoria;
         }
 
+        // 3. Atualiza os ícones na NOVA tela com proteção anti-crash
         for (int i = 0; i < runeUISlots.Length; i++)
         {
-            if (runeUISlots[i] != null)
+            if (runeUISlots[i] != null && globalCollectedRunes != null)
             {
-                runeUISlots[i].color = globalCollectedRunes[i] ? collectedColor : uncollectedColor;
+                bool foiColetada = (i < globalCollectedRunes.Length) ? globalCollectedRunes[i] : false;
+                runeUISlots[i].color = foiColetada ? collectedColor : uncollectedColor;
             }
         }
 
-        if (runeUIPanel != null) runeUIPanel.SetActive(true);
+        // 4. Decide se a UI já começa ligada ou desligada nesta cena
+        if (ocultarInterfaceNestaCena)
+        {
+            EsconderInterface();
+        }
+        else
+        {
+            MostrarInterface();
+        }
 
         if (portalPhase1 != null) portalPhase1.SetActive(false);
         if (finalPortal != null) finalPortal.SetActive(false);
+    }
+
+    public void EsconderInterface()
+    {
+        if (runeUIPanel != null) runeUIPanel.SetActive(false);
+    }
+
+    public void MostrarInterface()
+    {
+        if (runeUIPanel != null) runeUIPanel.SetActive(true);
     }
 
     public void CollectRune(int runeIndex)
@@ -91,11 +127,22 @@ public class RuneManager : MonoBehaviour
 
             if (playerTransform != null && teleportPointPhase2 != null)
             {
-                TransitionManager.Instance.DoTransition(() =>
+                // BLINDAGEM ANTI-BUG: Verifica se o TransitionManager realmente existe na cena de teste
+                if (TransitionManager.Instance != null)
                 {
+                    TransitionManager.Instance.DoTransition(() =>
+                    {
+                        playerTransform.position = teleportPointPhase2.position;
+                        CortarCameraPara(teleportPointPhase2.position);
+                    });
+                }
+                else
+                {
+                    // Caso falte o TransitionManager, faz o teleporte seco sem quebrar o jogo
+                    Debug.LogWarning("[RuneManager] TransitionManager não encontrado nesta cena! Teleportando diretamente de forma seca.");
                     playerTransform.position = teleportPointPhase2.position;
                     CortarCameraPara(teleportPointPhase2.position);
-                });
+                }
             }
         }
         // O jogador pegou as 5 runas (Fase 2)
@@ -105,19 +152,28 @@ public class RuneManager : MonoBehaviour
 
             if (finalPortal != null) finalPortal.SetActive(true);
 
-            // === NOVO: LÓGICA DO TELEPORTE FINAL ===
+            // LÓGICA DO TELEPORTE FINAL
             if (playerTransform != null && teleportPointFinal != null)
             {
-                TransitionManager.Instance.DoTransition(() =>
+                // BLINDAGEM ANTI-BUG para a Fase 2 também
+                if (TransitionManager.Instance != null)
                 {
+                    TransitionManager.Instance.DoTransition(() =>
+                    {
+                        playerTransform.position = teleportPointFinal.position;
+                        CortarCameraPara(teleportPointFinal.position);
+                    });
+                }
+                else
+                {
+                    Debug.LogWarning("[RuneManager] TransitionManager não encontrado nesta cena! Teleportando para o final de forma seca.");
                     playerTransform.position = teleportPointFinal.position;
                     CortarCameraPara(teleportPointFinal.position);
-                });
+                }
             }
         }
     }
 
-    // Função criada para organizar o código e não repetir a lógica da câmera duas vezes
     private void CortarCameraPara(Vector3 novaPosicao)
     {
         Camera mainCam = Camera.main;
@@ -138,7 +194,6 @@ public class RuneManager : MonoBehaviour
         finalPortal = portal;
         teleportPointFinal = teleportPoint;
 
-        // Verifica se o jogador já pegou todas as runas (caso raro, mas previne bugs)
         if (globalTotalRunesCollected == globalCollectedRunes.Length)
         {
             if (finalPortal != null) finalPortal.SetActive(true);
@@ -149,5 +204,18 @@ public class RuneManager : MonoBehaviour
         }
 
         Debug.Log("RuneManager: Portal Final conectado com sucesso na nova cena!");
+    }
+
+    public static void ResetarMemoriaDasRunas()
+    {
+        if (globalCollectedRunes != null)
+        {
+            for (int i = 0; i < globalCollectedRunes.Length; i++)
+            {
+                globalCollectedRunes[i] = false;
+            }
+        }
+        globalTotalRunesCollected = 0;
+        isMemoryInitialized = false;
     }
 }
